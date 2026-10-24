@@ -5,14 +5,22 @@ interface Task {
     title:string;
     status:TaskStatus;
 }
-function addTask(tasks : Task[], newTask: Task) :Task []{
-    return [...tasks,newTask]
+let nextId = 1;
+function addTask(tasks: Task[], title: string): Task[] {
+    const newTask: Task = {
+        id: nextId++,
+        title: title,
+        status: "todo"
+    };
+    return [...tasks, newTask];
 }
 
 function completeTask(tasks : Task[],id:number): Task[]{
-    return tasks.map((ele => Element.id == id ? { ... ele , status:"done"}: ele));
+    return tasks.map((ele)=> 
+         ele.id === id ? { ... ele , status:"done"}: ele
+);
 }
 
 function filterByStatus( tasks : Task[], status : TaskStatus) : Task[] {
-    return tasks .filter((ele)=> ele.Status == status);
+    return tasks.filter((ele)=> ele.status === status);
 }
